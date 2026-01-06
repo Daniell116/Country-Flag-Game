@@ -6,13 +6,13 @@
 //
 
 import Foundation
-struct Anwer: Identifiable {
+struct Answer: Identifiable {
     var id = UUID()
     var text: String
     var isCorrect: Bool
 }
 struct Question: Identifiable {
     var id = UUID()
-    var correctAnswer: Anwer
-    var incorrectAnswers: [Anwer]
+    var correctAnswer: Answer
+    var incorrectAnswers: [Answer]
 }
