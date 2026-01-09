@@ -39,13 +39,13 @@ class GameManager {
         else {
             questions.removeAll()
             for country in countries {
-                if UIImage(named: country ) != nil {
+                if UIImage(named: country) != nil {
                     var incorrectAnswers = [String]()
                     while incorrectAnswers.count < 3 {
-                        if let randomCountry = countries.randomElement() {
-                            if randomCountry != country && !incorrectAnswers.contains(randomCountry) {
+                        if let randomCountry = countries.randomElement(),
+                           !incorrectAnswers.contains(randomCountry) {
                                 incorrectAnswers.append(randomCountry)
-                            }
+                            
                         }
                     }
                     questions.append(Question(correctAnswer: Answer(text: country, isCorrect: true),
@@ -72,6 +72,12 @@ class GameManager {
         }
         else {
             playingGame = false
+        }
+    }
+    func selectAnswer(answer: Answer) {
+        answerSelected = true
+        if answer.isCorrect {
+            score += 1
         }
     }
 }
