@@ -8,30 +8,49 @@
 import SwiftUI
 
 struct Question_View: View {
+    @Environment(GameManager.self) var gameManager
     var body: some View {
         VStack(spacing: 20) {
-            HStack {
-                Text("Country Flag Game")
-                    .fontWeight(.heavy)
-                    .padding()
+            if gameManager.playingGame {
+                HStack {
+                    Text("Country Flag Game")
+                        .fontWeight(.heavy)
+                        .padding()
+                    Spacer()
+                    Text("\(gameManager.index) out of \(gameManager.questions.count)")
+                        .padding()
+                }
+                ProgressBar(progress: gameManager.progress)
+                VStack(spacing: 10) {
+                    Text("Which country's flag is this?")
+                        .font(.title)
+                    Image(gameManager.country)
+                        .resizable()
+                        .frame(width: 300, height: 200)
+                    ForEach(gameManager.answerChoices) { answer in
+                        AnswerRow(answer: answer)
+                    }
+                }
+                Button {
+                    gameManager.gotoNextQuestion()
+                } label: {
+                    CustomButton(text: "Next", background: gameManager.answerSelected ? .yellow : .gray)
+                }
+                .disabled(!gameManager.answerSelected)
                 Spacer()
-                Text("1 out of 3")
-                    .padding()
             }
-            ProgressBar(progress: 50)
-            VStack(spacing: 10) {
-                Text("Which country's flag is this?")
+            else {
+                Text("Country Flag Game")
                     .font(.title)
-                Image("Italy")
-                    .resizable()
-                    .frame(width: 300, height: 200)
-                AnswerRow(answer: Answer(text: "France", isCorrect: false))
-                AnswerRow(answer: Answer(text: "Germany", isCorrect: false))
-                AnswerRow(answer: Answer(text: "Italy", isCorrect: true))
-                AnswerRow(answer: Answer(text: "England", isCorrect: false))
+                    .fontWeight(.heavy)
+                Text("Congrats! you've completed the game!")
+                Text("You scored \(gameManager.score) out of \(gameManager.questions.count)")
+                Button {
+                    gameManager.reset()
+                } label: {
+                    CustomButton(text: "Play Again")
+                }
             }
-            CustomButton(text: "Next")
-            Spacer()
         }
         .foregroundColor(.yellow)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -39,7 +58,6 @@ struct Question_View: View {
         .navigationBarBackButtonHidden(true)
     }
 }
-
 #Preview {
     Question_View()
 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AnswerRow: View {
     var answer: Answer
+    @Environment(GameManager.self) var gameManager
     @State private var isSelected = false
     var body: some View {
         HStack(spacing: 20) {

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var gameManager = GameManager()
+    @State private var gameManager = GameManager()
     var body: some View {
         NavigationView {
             VStack(spacing: 40) {
@@ -20,7 +20,7 @@ struct ContentView: View {
                 }
                 NavigationLink {
                     Question_View()
-                        .environmentObject(gameManager)
+                        .environment(gameManager)
                 } label: {
                     CustomButton(text: "Start game")
                 }

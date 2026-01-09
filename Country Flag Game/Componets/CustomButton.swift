@@ -9,13 +9,13 @@ import SwiftUI
 
 struct CustomButton: View {
     var text: String
-    var backgroundColor: Color = .yellow
+    var background: Color = .yellow
     var body: some View {
         Text(text)
-            .foregroundColor(.cyan)
+            .foregroundStyle(.cyan)
             .padding()
             .padding(.horizontal)
-            .background(backgroundColor)
+            .background(background)
             .cornerRadius(25)
             .shadow(radius: 10)
     }

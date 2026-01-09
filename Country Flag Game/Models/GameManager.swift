@@ -7,17 +7,17 @@
 
 import Foundation
 import SwiftUI
-internal import Combine
 
-class GameManager: ObservableObject {
+@Observable
+class GameManager {
     var questions = [Question]()
-    @Published private(set) var index = 0
-    @Published private(set) var playingGame = false
-    @Published private(set) var answerSelected = false
-    @Published private(set) var country = ""
-    @Published private(set) var answerChoices = [Answer]()
-    @Published private(set) var progress: CGFloat = 0.0
-    @Published private(set) var score = 0
+    private(set) var index = 0
+    private(set) var playingGame = false
+    private(set) var answerSelected = false
+    private(set) var country = ""
+    private(set) var answerChoices = [Answer]()
+    private(set) var progress: CGFloat = 0.0
+    private(set) var score = 0
     init() {
         reset()
     }
@@ -28,7 +28,7 @@ class GameManager: ObservableObject {
         progress = 0.0
         playingGame = true
         loadQuestions()
-        GotoNextQuestion()
+        gotoNextQuestion()
         
     }
     func loadQuestions() {
@@ -61,7 +61,7 @@ class GameManager: ObservableObject {
             }
         }
     }
-    func GotoNextQuestion() {
+    func gotoNextQuestion() {
         if index < questions.count {
             answerSelected = false
             progress = CGFloat(index) / CGFloat(questions.count) * 350.0
