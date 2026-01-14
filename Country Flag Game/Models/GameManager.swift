@@ -18,22 +18,24 @@ class GameManager {
     private(set) var answerChoices = [Answer]()
     private(set) var progress: CGFloat = 0.0
     private(set) var score = 0
+    
     init() {
         reset()
     }
+    
     func reset() {
+        loadQuestions()
         questions = questions.shuffled()
         index = 0
         score = 0
         progress = 0.0
         playingGame = true
-        loadQuestions()
-        gotoNextQuestion()
-        
+        goToNextQuestion()
     }
+    
     func loadQuestions() {
         let countries = Data().counrties
-        if countries.count > 4 {
+        if countries.count < 4 {
             print("There are only \(countries.count) countries listed in the data (must be at least 4)")
         }
         else {
@@ -43,6 +45,7 @@ class GameManager {
                     var incorrectAnswers = [String]()
                     while incorrectAnswers.count < 3 {
                         if let randomCountry = countries.randomElement(),
+                           randomCountry != country,
                            !incorrectAnswers.contains(randomCountry) {
                                 incorrectAnswers.append(randomCountry)
                             
@@ -61,7 +64,8 @@ class GameManager {
             }
         }
     }
-    func gotoNextQuestion() {
+    
+    func goToNextQuestion() {
         if index < questions.count {
             answerSelected = false
             progress = CGFloat(index) / CGFloat(questions.count) * 350.0
@@ -74,6 +78,7 @@ class GameManager {
             playingGame = false
         }
     }
+    
     func selectAnswer(answer: Answer) {
         answerSelected = true
         if answer.isCorrect {

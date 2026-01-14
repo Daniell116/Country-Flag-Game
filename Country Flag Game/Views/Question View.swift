@@ -2,8 +2,8 @@
 //  Question View.swift
 //  Country Flag Game
 //
-//  Created by daniell Escareno on 1/7/26.
-//
+//  Created by daniell Escareno 1/7/26.
+// this is normal to crash
 
 import SwiftUI
 
@@ -32,7 +32,7 @@ struct Question_View: View {
                     }
                 }
                 Button {
-                    gameManager.gotoNextQuestion()
+                    gameManager.goToNextQuestion()
                 } label: {
                     CustomButton(text: "Next", background: gameManager.answerSelected ? .yellow : .gray)
                 }
@@ -58,6 +58,7 @@ struct Question_View: View {
         .navigationBarBackButtonHidden(true)
     }
 }
+
 #Preview {
     Question_View()
 }

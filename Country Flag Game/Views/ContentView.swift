@@ -22,10 +22,10 @@ struct ContentView: View {
                     Question_View()
                         .environment(gameManager)
                 } label: {
-                    CustomButton(text: "Start game")
+                    CustomButton(text: "Start")
                 }
             }
-            .foregroundColor(.yellow)
+            .foregroundStyle(.yellow)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.cyan)
         }
