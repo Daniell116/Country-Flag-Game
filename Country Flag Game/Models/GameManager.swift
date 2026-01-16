@@ -18,7 +18,7 @@ class GameManager {
     private(set) var answerChoices = [Answer]()
     private(set) var progress: CGFloat = 0.0
     private(set) var score = 0
-    
+
     init() {
         reset()
     }
@@ -48,7 +48,6 @@ class GameManager {
                            randomCountry != country,
                            !incorrectAnswers.contains(randomCountry) {
                                 incorrectAnswers.append(randomCountry)
-                            
                         }
                     }
                     questions.append(Question(correctAnswer: Answer(text: country, isCorrect: true),
